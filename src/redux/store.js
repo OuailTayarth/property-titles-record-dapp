@@ -1,5 +1,4 @@
-import { applyMiddleware, compose, createStore, combineReducers } from "redux";
-import thunk from "redux-thunk";
+import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import blockchainReducer from "./blockchain/blockchainReducer";
 import dataReducer from "./data/dataReducer";
 
@@ -8,13 +7,8 @@ const rootReducer = combineReducers({
   data: dataReducer,
 });
 
-const middleware = [thunk];
-const composeEnhancers = compose(applyMiddleware(...middleware));
-
-const configureStore = () => {
-  return createStore(rootReducer, composeEnhancers);
-};
-
-const store = configureStore();
+const store = configureStore({
+  reducer: rootReducer,
+});
 
 export default store;
